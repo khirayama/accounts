@@ -1,0 +1,4 @@
+{
+  "source": "./dev/assets/scripts/",
+  "destination": "./esdoc"
+}

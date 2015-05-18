@@ -1,0 +1,19 @@
+{
+  "coverage": "0%",
+  "expectCount": 17,
+  "actualCount": 0,
+  "files": {
+    "scripts/framework/Component.js": {
+      "expectCount": 7,
+      "actualCount": 0
+    },
+    "scripts/framework/EventDispatcher.js": {
+      "expectCount": 4,
+      "actualCount": 0
+    },
+    "scripts/framework/Store.js": {
+      "expectCount": 6,
+      "actualCount": 0
+    }
+  }
+}
