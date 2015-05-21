@@ -36,8 +36,26 @@ class PropertyStore extends Store {
     this._properties[id] = Object.assign({}, this._properties[id], updates);
   }
   _destroy() {
+    delete this._properties;
   }
-  _updateOrders() {
+  _updateOrders(from, to) {
+    for (let id in this._properties) {
+      if (!{}.hasOwnProperty.call(this._properties, id)) return false;
+      let property = this._properties[id];
+      if (from > to) {
+        if (property.order >= to && property.order < from) {
+          property.order += 1;
+        } else if (property.order === from) {
+          property.order = to;
+        }
+      } else if (to > from) {
+        if (property.order > from && property.order <= to) {
+          property.order -= 1;
+        } else if (property.order === from) {
+          property.order = to;
+        }
+      }
+    }
   }
   getAll() {
   }
