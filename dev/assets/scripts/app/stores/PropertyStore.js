@@ -58,6 +58,18 @@ class PropertyStore extends Store {
     }
   }
   getAll() {
+    let properties = [];
+    for (let key in this._properties) {
+      if (!{}.hasOwnProperty.call(this._todos, key)) return false;
+      let property = this._properties[key];
+      properties.push(property);
+    }
+    properties.sort((a, b) => {
+      let x = a.order;
+      let y = b.order;
+      return (x > y) ? 1 : -1;
+    });
+    return properties;
   }
 }
 export default new PropertyStore();
