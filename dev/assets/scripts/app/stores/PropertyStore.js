@@ -35,8 +35,8 @@ class PropertyStore extends Store {
   _update(id, updates) {
     this._properties[id] = Object.assign({}, this._properties[id], updates);
   }
-  _destroy() {
-    delete this._properties;
+  _destroy(id) {
+    delete this._properties[id];
   }
   _updateOrders(from, to) {
     for (let id in this._properties) {
