@@ -44,15 +44,15 @@ class PropertyStore extends Store {
       let property = this._properties[id];
       if (from > to) {
         if (property.order >= to && property.order < from) {
-          property.order += 1;
+          this._update(id, {order: this._properties[id].order + 1});
         } else if (property.order === from) {
-          property.order = to;
+          this._update(id, {order: to});
         }
       } else if (to > from) {
         if (property.order > from && property.order <= to) {
-          property.order -= 1;
+          this._update(id, {order: this._properties[id].order - 1});
         } else if (property.order === from) {
-          property.order = to;
+          this._update(id, {order: to});
         }
       }
     }
