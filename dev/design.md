@@ -58,11 +58,6 @@ ReceiptSubCategory
   updateName
   destroy
 
-ReceiptCategory
-  create
-  updateName
-  destroy
-
 PaymentCategory
   create
   updateName
