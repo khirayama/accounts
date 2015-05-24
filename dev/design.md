@@ -1,4 +1,5 @@
 # Design
+2015.05.23 Sat.
 
 ## Store
 Property(id, name, amount)
@@ -10,6 +11,7 @@ ReceiptSubCategory(id, name)
 PaymentCategory(id, name, budget, budgetType)
 PaymentSubCategory(id, name)
 SettingDate(id, date, holiday)
+
 
 ## AppDispatcher
 Singleton
@@ -76,6 +78,7 @@ SettingDate
   create
   updateDate
   updateHoliday
+
 
 # View
 App
