@@ -1,5 +1,6 @@
 # Design
-2015.05.23 Sat.
+
+2015.05.25 Mon.
 
 ## Store
 Property(id, name, amount)
