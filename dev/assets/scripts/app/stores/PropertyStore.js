@@ -28,16 +28,28 @@ class PropertyStore extends Store {
   }
 
   /**
-    資産を追加するmethod
+    資産を更新するmethod
     @param {string} id - 資産id
     @param {object} updates - 資産Object
   */
   _update(id, updates) {
     this._properties[id] = Object.assign({}, this._properties[id], updates);
   }
+
+  /**
+    資産を削除するmethod
+    @param {string} id - 資産id
+  */
   _destroy(id) {
     delete this._properties[id];
   }
+
+  /**
+    資産の表示順を変更するmethod
+    @param {number} from  - 移動する資産
+    @param {number} to - 移動先
+  */
+ // FIXME: fromをidに変更した方がいい？
   _updateOrders(from, to) {
     for (let id in this._properties) {
       if (!{}.hasOwnProperty.call(this._properties, id)) return false;
