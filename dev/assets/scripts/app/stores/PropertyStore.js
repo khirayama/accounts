@@ -69,6 +69,9 @@ class PropertyStore extends Store {
       }
     }
   }
+  /**
+    資産一覧を取得するmethod
+  */
   getAll() {
     let properties = [];
     for (let key in this._properties) {
