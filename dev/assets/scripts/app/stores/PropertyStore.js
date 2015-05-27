@@ -93,5 +93,12 @@ class PropertyStore extends Store {
   saveData() {
     localStorage.setItem('_properties', JSON.stringify(this._properties));
   }
+  /**
+    資産を読み込むするmethod
+    TODO: indexedDBに書き換えたいが、ちょっと知見足りないorz
+  */
+  loadData() {
+    return JSON.parse(localStorage.getItem('_properties'));
+  }
 }
 export default new PropertyStore();
