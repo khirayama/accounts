@@ -86,5 +86,12 @@ class PropertyStore extends Store {
     });
     return properties;
   }
+  /**
+    資産を保存するmethod
+    TODO: indexedDBに書き換えたいが、ちょっと知見足りないorz
+  */
+  saveData() {
+    localStorage.setItem('_properties', JSON.stringify(this._properties));
+  }
 }
 export default new PropertyStore();
