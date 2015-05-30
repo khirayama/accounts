@@ -6,7 +6,7 @@
 Property(id, name, amount)
 Receipt(id, amount, date, subcategory, memo)
 Payment(id, amount, date, subcategory, memo)
-Transfer(id, amount, from, to, memo)
+Transfer(id, amount, date, from, to, memo)
 ReceiptCategory(id, name)
 ReceiptSubcategory(id, name, category)
 PaymentCategory(id, name, budget, budgetType)
