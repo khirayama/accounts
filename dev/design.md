@@ -4,14 +4,15 @@
 
 ## Store
 Property(id, name, amount)
-Receipt(id, amount, date, category, memo)
-Payment(id, amount, date, category, memo)
+Receipt(id, amount, date, subcategory, memo)
+Payment(id, amount, date, subcategory, memo)
 Transfer(id, amount, from, to, memo)
 ReceiptCategory(id, name)
-ReceiptSubCategory(id, name)
+ReceiptSubcategory(id, name, category)
 PaymentCategory(id, name, budget, budgetType)
-PaymentSubCategory(id, name)
+PaymentSubcategory(id, name, category)
 SettingDate(id, date, holiday)
+
 
 
 ## AppDispatcher
@@ -74,6 +75,7 @@ SettingDate
   create
   updateDate
   updateHoliday
+
 
 
 # View
