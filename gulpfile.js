@@ -89,7 +89,7 @@ gulp.task('watch', function() {
   gulp.watch(['dev/**/*.scss'], ['styles']);
   gulp.watch(['dev/**/*.jade'], ['markups']);
   gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts']);
-  gulp.watch(['dev/**/*.js'], ['test']);
+  // gulp.watch(['dev/**/*.js'], ['test']);
   gulp.watch(['dev/**/*.+(png|jpg|gif)'], ['files']);
 });
 
