@@ -24,7 +24,12 @@ class PropertyStore extends Store {
     this._save();
   }
   getAll() {
-    return this._properties;
+    let properties = [];
+    for (let id in this._properties) {
+      if (!{}.hasOwnProperty.call(this._properties, id)) return false;
+      properties.push(this._properties[id]);
+    }
+    return properties;
   }
   _save() {
     localStorage.setItem('_properties', JSON.stringify(this._properties));
