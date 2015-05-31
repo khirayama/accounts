@@ -6,11 +6,17 @@ export default class PropertyItem extends Component {
       property: property
     });
   }
+  handleEvents() {
+    this.on('click', '.edit-btn', () => {
+      console.log('PropertyAction.updateAmount()');
+    });
+  }
   template() {
     let property = this.props.property;
     return (
       `<li>
-        ${property.name} / ${property.amount} [編集]
+        <label>${property.name} / ${property.amount}</label>
+        <div class="edit-btn">[編集]</div>
       </li>`
     );
   }
