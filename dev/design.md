@@ -4,11 +4,10 @@
 - [x] Payment(id, amount, date, subcategory, memo)
 - [x] Transfer(id, amount, date, from, to, memo)
 - [x] ReceiptCategory(id, name)
-- [ ] ReceiptSubcategory(id, name, category)
+- [x] ReceiptSubcategory(id, name, category)
 - [x] PaymentCategory(id, name, budget, budgetType)
 - [ ] PaymentSubcategory(id, name, category)
 - [ ] SettingDate(id, date, holiday)
-
 
 # AppDispatcher
 Singleton
