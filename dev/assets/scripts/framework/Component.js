@@ -14,6 +14,7 @@ export default class Component {
       this.el = this._createElements(this.template());
     }
     if (this.handleEvents) this.handleEvents();
+    if (this.render) this.render();
   }
   setState(state, update = true) {
     this.state = Object.assign({}, this.state, state);

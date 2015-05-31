@@ -1,3 +1,4 @@
-import PropertyStore from './stores/PropertyStore';
+import PropertyList from './components/PropertyList';
 
-console.log(PropertyStore);
+let PropertyListElement = document.querySelector('#properties');
+const propertyList = new PropertyList(PropertyListElement);
