@@ -7,7 +7,7 @@
 - [x] ReceiptSubcategory(id, name, category)
 - [x] PaymentCategory(id, name, budget, budgetType)
 - [x] PaymentSubcategory(id, name, category)
-- [ ] SettingDate(id, date, holiday)
+- [x] SettingDate(id, date, holiday)
 
 # AppDispatcher
 Singleton
