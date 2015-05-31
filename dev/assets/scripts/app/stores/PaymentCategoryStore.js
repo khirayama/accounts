@@ -34,6 +34,9 @@ class PaymentCategoryStore extends Store {
   getAll() {
     return this._paymentCategories;
   }
+  getBudgetType() {
+    return BUDGET_TYPE;
+  }
   _save() {
     localStorage.setItem('_paymentCategories', JSON.stringify(this._paymentCategories));
   }
