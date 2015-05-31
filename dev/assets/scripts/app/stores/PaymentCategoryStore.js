@@ -1,16 +1,25 @@
 import 'babel/polyfill';
 import Store from '../../framework/Store';
 
+let BUDGET_TYPE = {
+  DAILY: 'DAILY', // 日割（食費等）
+  REGULARLY: 'REGULARLY', // 定期（家賃、電気代、携帯料金等）
+  IRREGULARLY: 'IRREGULARLY' // 不定期変動（娯楽、旅行、冠婚葬祭等）
+};
+
 class PaymentCategoryStore extends Store {
   constructor() {
     super();
     this._paymentCategories = this._load() || {};
   }
-  _create(name) {
+  _create(name, budget, budgetType) {
+    // budget: 予算額
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._paymentCategories[id] = {
       id: id,
-      name: name
+      name: name,
+      budget: budget || 0,
+      budgetType: budgetType || BUDGET_TYPE.DAILY
     };
     this._save();
   }
