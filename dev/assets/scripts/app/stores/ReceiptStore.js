@@ -12,7 +12,7 @@ class ReceiptStore extends Store {
     this._receipts[id] = {
       id: id,
       amount: amount,
-      data: date,
+      date: date,
       subcategory: subcategory,
       memo: memo
     };

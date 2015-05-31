@@ -12,7 +12,7 @@ class PaymentStore extends Store {
     this._payments[id] = {
       id: id,
       amount: amount,
-      data: date,
+      date: date,
       subcategory: subcategory,
       memo: memo
     };
