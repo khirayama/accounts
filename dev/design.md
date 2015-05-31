@@ -6,7 +6,7 @@
 - [x] ReceiptCategory(id, name)
 - [x] ReceiptSubcategory(id, name, category)
 - [x] PaymentCategory(id, name, budget, budgetType)
-- [ ] PaymentSubcategory(id, name, category)
+- [x] PaymentSubcategory(id, name, category)
 - [ ] SettingDate(id, date, holiday)
 
 # AppDispatcher
