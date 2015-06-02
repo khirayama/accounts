@@ -8,15 +8,16 @@ export default class PropertyItem extends Component {
   }
   handleEvents() {
     this.on('click', '.edit-btn', () => {
-      console.log('PropertyAction.updateAmount()');
+      // show Modal
+      console.log('PropertyActions.updateAmount()');
     });
   }
   template() {
-    let property = this.props.property;
     return (
       `<li>
-        <label>${property.name} / ${property.amount}</label>
-        <div class="edit-btn">[編集]</div>
+        <label>${this.props.property.name}</label>
+        <label>${this.props.property.amount}</label>
+        <div class="edit-btn">[edit]</div>
       </li>`
     );
   }

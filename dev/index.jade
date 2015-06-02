@@ -7,7 +7,15 @@ html(lang="en")
     link(rel="stylesheet" href="app.css")
   body
     #accounts
-      #add-property-btn [資産を追加]
+      #add-property-btn [add]
+      #property-modal
+        form#property-form
+          .property-name
+            input(type="text" name="name")
+          .property-amount
+            input(type="number" name="amount")
+          .property-submit-btn
+            input(type="submit" value="submit")
       ul#properties
     script(src="app.js")
 

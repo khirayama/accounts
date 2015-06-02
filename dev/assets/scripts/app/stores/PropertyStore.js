@@ -5,6 +5,11 @@ class PropertyStore extends Store {
   constructor() {
     super();
     this._properties = this._load() || {};
+    this.register({
+      'PROPERTY_CREATE': (action) => {
+        if (action.name && action.amount) this._create(action.name, action.amount);
+      }
+    });
   }
   _create(name, amount) {
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);

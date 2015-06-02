@@ -5,13 +5,8 @@ import AppDispatcher from './AppDispatcher';
 const CHANGE_EVENT = 'CHANGE';
 
 export default class Store extends EventDispatcher {
-  constructor(actions) {
+  constructor() {
     super();
-    for (let key in actions) {
-      if (!{}.hasOwnProperty.call(actions, key)) return false;
-      let action = actions[key];
-      this.register(key, action);
-    }
   }
   dispatchChange() {
     this.dispatch(CHANGE_EVENT);
@@ -22,11 +17,15 @@ export default class Store extends EventDispatcher {
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }
-  register(key, action) {
-    AppDispatcher.on(key, (data) => {
-      action(data);
-      this.dispatchChange();
-    });
+  register(actions) {
+    for (let key in actions) {
+      if (!{}.hasOwnProperty.call(actions, key)) return false;
+      let action = actions[key];
+      AppDispatcher.on(key, (data) => {
+        action(data);
+        this.dispatchChange();
+      });
+    }
   }
 }
 
