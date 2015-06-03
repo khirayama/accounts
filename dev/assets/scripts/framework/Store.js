@@ -21,6 +21,8 @@ export default class Store extends EventDispatcher {
     for (let key in actions) {
       if (!{}.hasOwnProperty.call(actions, key)) return false;
       let action = actions[key];
+      // TODO: これ、どうすれば...
+      // FIXME: forの中でfunctionを作りたくない
       AppDispatcher.on(key, (data) => {
         action(data);
         this.dispatchChange();
