@@ -4,12 +4,15 @@ import Store from '../../framework/Store';
 class PropertyStore extends Store {
   constructor() {
     super();
-    this._properties = this._load() || {};
     this.register({
       'PROPERTY_CREATE': (action) => {
         if (action.name && action.amount) this._create(action.name, action.amount);
+      },
+      'PROPERTY_DESTROY': (action) => {
+        this._destroy(action.id);
       }
     });
+    this._properties = this._load() || {};
   }
   _create(name, amount) {
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
