@@ -44,11 +44,13 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(['dev/assets/scripts/app/app.js'])
+  return gulp.src(['dev/assets/scripts/app/app.jsx'])
     .pipe(plumber(options.plumber))
     .pipe(browserify({
+      outfile: 'app.js',
       transform: ['babelify'],
-      debug: true
+      debug: true,
+      extensions: ['.jsx', '.js']
     }))
     .pipe(gulp.dest('public/'))
     .pipe(browserSync.reload({stream: true}));
@@ -88,7 +90,7 @@ gulp.task('browserSync', ['markups', 'styles', 'scripts', 'images', 'files', 'ui
 gulp.task('watch', function() {
   gulp.watch(['dev/**/*.scss'], ['styles']);
   gulp.watch(['dev/**/*.jade'], ['markups']);
-  gulp.watch(['dev/**/*.js', '!dev/**/*.test.js'], ['scripts']);
+  gulp.watch(['dev/**/*.js', 'dev/**/*.jsx', '!dev/**/*.test.js'], ['scripts']);
   // gulp.watch(['dev/**/*.js'], ['test']);
   gulp.watch(['dev/**/*.+(png|jpg|gif)'], ['files']);
 });
