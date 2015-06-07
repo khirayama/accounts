@@ -7,15 +7,10 @@ let PropertyActions = {
       amount: amount
     });
   },
-  updateName: (id, name) => {
-    AppDispatcher.dispatch('PROPERTY_UPDATE_NAME', {
+  update: (id, name, amount) => {
+    AppDispatcher.dispatch('PROPERTY_UPDATE', {
       id: id,
-      name: name
-    });
-  },
-  updateAmount: (id, amount) => {
-    AppDispatcher.dispatch('PROPERTY_UPDATE_AMOUNT', {
-      id: id,
+      name: name,
       amount: amount
     });
   },

@@ -11,11 +11,16 @@ export default class PropertyItem extends Component {
   }
   handleEvents() {
     this.on('click', '.edit-btn', () => {
-      // show Modal
       this.setState({
         isEditing: true
       });
-      console.log('PropertyActions.updateAmount()');
+    });
+    this.on('click', '.submit-btn', (event) => {
+      event.preventDefault();
+      let id = this.props.property.id;
+      let name = this.el.querySelector('input[name="name"').value;
+      let amount = this.el.querySelector('input[name="amount"').value;
+      PropertyActions.update(id, name, amount);
     });
     this.on('click', '.destroy-btn', () => {
       let id = this.props.property.id;
@@ -23,18 +28,16 @@ export default class PropertyItem extends Component {
     });
   }
   template() {
-    return (
-      `<li>${this.itemTemplate()}</li>`
-    );
+    return `<li>${this.itemTemplate()}</li>`;
   }
   itemTemplate() {
     let itemTemplate = '';
     if (this.state.isEditing) {
       itemTemplate =
         `<form>
-        <input type="text" value="${this.props.property.name}">
-        <input type="number" value="${this.props.property.amount}">
-        <input type="submit" value="[submit]" class="submit-btn">
+          <input type="text" name="name" value="${this.props.property.name}">
+          <input type="number" name="amount" value="${this.props.property.amount}">
+          <input type="submit" value="[submit]" class="submit-btn">
         </form>`;
     } else {
       itemTemplate =

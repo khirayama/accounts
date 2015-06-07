@@ -8,6 +8,9 @@ class PropertyStore extends Store {
       'PROPERTY_CREATE': (action) => {
         if (action.name && action.amount) this._create(action.name, action.amount);
       },
+      'PROPERTY_UPDATE': (action) => {
+        if (action.name && action.amount) this._update(action.id, {name: action.name, amount: action.amount});
+      },
       'PROPERTY_DESTROY': (action) => {
         this._destroy(action.id);
       }
