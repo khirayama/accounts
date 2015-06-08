@@ -10,8 +10,9 @@ export default class AccountApp extends React.Component {
     };
   }
   componentDidMount() {
-    PropertyStore.addChangeListener(this._onChange);
+    PropertyStore.addChangeListener(this._onChange.bind(this));
   }
+  // TODO: componentWillUnmount書く
   render() {
     return (
       <div>

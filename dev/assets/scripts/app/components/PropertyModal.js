@@ -1,11 +1,12 @@
 import React from 'react';
+import PropertyActionis from '../actions/PropertyActions';
 
 export default class PropertyModal extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: 'aaa',
-      amount: '1111'
+      name: '',
+      amount: ''
     };
   }
   render() {
@@ -24,20 +25,23 @@ export default class PropertyModal extends React.Component {
                    value={this.state.amount}
                    onChange={this._onKeyDownAmount.bind(this)} />
           </div>
-          <div id="property-submit-btn"><input type="submit" value="[submit]" onClick={this._onSubmitNewProperty} /></div>
+          <div id="property-submit-btn"><input type="submit" value="[submit]" onClick={this._onSubmitNewProperty.bind(this)} /></div>
         </form>
       </div>
     );
   }
   _onSubmitNewProperty(event) {
     event.preventDefault();
-    console.log('add new property');
+    PropertyActionis.create(this.state.name, this.state.amount);
+    this.setState({
+      name: '',
+      amount: ''
+    });
   }
   _onChangeName(event) {
     this.setState({name: event.target.value});
   }
   _onKeyDownAmount(event) {
-    console.log(this, event);
-    // this.setState({amount: 222});
+    this.setState({amount: event.target.value});
   }
 }
