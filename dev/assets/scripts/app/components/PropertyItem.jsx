@@ -5,6 +5,11 @@ export default class PropertyItem extends React.Component {
     super();
   }
   render() {
-    return <li>{this.props.property.name}</li>;
+    return (
+      <li>
+        <label>{this.props.property.name}</label>
+        <label>{this.props.property.amount}</label>
+      </li>
+    );
   }
 }
