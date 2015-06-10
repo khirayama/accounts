@@ -9,6 +9,8 @@ export default class PropertyItem extends React.Component {
       <li>
         <label>{this.props.property.name}</label>
         <label>{this.props.property.amount}</label>
+        <button type="button" name="edit" value="edit">[EDIT]</button>
+        <button type="button" name="delete" value="delete">[DELETE]</button>
       </li>
     );
   }
