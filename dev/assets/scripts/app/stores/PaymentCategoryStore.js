@@ -2,24 +2,26 @@ import 'babel/polyfill';
 import Store from '../../framework/Store';
 
 let BUDGET_TYPE = {
-  DAILY: 'DAILY', // 日割（食費等）
-  REGULARLY: 'REGULARLY', // 定期（家賃、電気代、携帯料金等）
-  IRREGULARLY: 'IRREGULARLY' // 不定期変動（娯楽、旅行、冠婚葬祭等）
+  DAILY: 'DAILY', // 日割で計算したいもの（食費等）
+  IRREGULARLY: 'IRREGULARLY', // 不定期変動費。月によって出たりでなかったりするもの（娯楽、旅行、冠婚葬祭等）
+  REGULARLY: 'REGULARLY' // 定期。毎月支払いがあり、一定の金額が見込まれるもの（家賃、電気代、携帯料金等）
 };
 
 class PaymentCategoryStore extends Store {
   constructor() {
     super();
     this._paymentCategories = this._load() || {};
+
+    if (!Object.keys(this._paymentCategories).length) this._initialize();
   }
-  _create(name, budget, budgetType) {
+  _create(name, budgetType, budget) {
     // budget: 予算額
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._paymentCategories[id] = {
       id: id,
       name: name,
-      budget: budget || 0,
-      budgetType: budgetType || BUDGET_TYPE.DAILY
+      budgetType: budgetType || BUDGET_TYPE.DAILY,
+      budget: budget || 0
     };
     this._save();
   }
@@ -42,6 +44,21 @@ class PaymentCategoryStore extends Store {
   }
   _load() {
     return JSON.parse(localStorage.getItem('_paymentCategories'));
+  }
+  _initialize() {
+    this._create('食費', BUDGET_TYPE.DAILY, 30000)
+    this._create('日用品', BUDGET_TYPE.DAILY, 5000);
+
+    this._create('交通費', BUDGET_TYPE.IRREGULARLY, 3000);
+    this._create('趣味・娯楽', BUDGET_TYPE.IRREGULARLY, 20000);
+    this._create('衣服・美容', BUDGET_TYPE.IRREGULARLY, 15000);
+    this._create('交際費', BUDGET_TYPE.IRREGULARLY, 20000);
+    this._create('健康・医療', BUDGET_TYPE.IRREGULARLY, 3000);
+    this._create('特別な支出', BUDGET_TYPE.IRREGULARLY, 0);
+
+    this._create('住宅', BUDGET_TYPE.REGULARLY, 109000);
+    this._create('光熱費', BUDGET_TYPE.REGULARLY, 20000);
+    this._create('通信費', BUDGET_TYPE.REGULARLY, 5000);
   }
 }
 export default new PaymentCategoryStore();
