@@ -1,47 +1,116 @@
 import React from 'react';
 
+let TAB = {
+  PAYMENT: 'PAYMENT',
+  RECEIPT: 'RECEIPT',
+  TRANSFER: 'TRANSFER'
+};
+
 export default class InputSection extends React.Component {
   constructor() {
     super();
     this.state = {
-      category: [{id: 'fav', name: 'よく使う項目'},
-        {id: 'hoge', name: '食費'},
-        {id: 'hoga', name: '交通費'},
-        {id: 'huga', name: '交際費'},
-      ],
-      subcategory: {
-        fav: ['よく使う1', 'よく使う2', 'よく使う3'],
-        hoge: ['食費1', '食費2', '食費3'],
-        hoga: ['交通費1', '交通費2', '交通費3'],
-        huga: ['交際費1', '交際費2', '交際費3']
-      }
+      tab: TAB.PAYMENT,
+      amount: '',
+      property: '',
+      data: '',
+      category: '',
+      memo: ''
     };
   }
   render() {
-    let categories = this.state.category.map(function (category) {
-      return <li>{category.name}</li>
+    let cx = function (obj) {
+      let classes = [];
+      for (let className in obj) {
+        if (obj[className]) classes.push(className);
+        return classes.join(' ');
+      }
+    };
+    let properties = this.props.properties.map(function (property) {
+      return <option key={property.id} value={property.id}>{property.name}</option>
     });
-    let subcategories = this.state.subcategory['fav'].map(function (subcategory) {
-      return <li>{subcategory}</li>
-    });
+    let categories = [];
+    let form;
+    switch (this.state.tab) {
+      case TAB.PAYMENT:
+        categories = this.props.paymentCategories.map(function (category) {
+          return <option key={category.id} value={category.id}>{category.name}</option>
+        });
+        form = (
+          <form>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
+            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
+            <select name="category" value={this.state.category} onChange={this._onChangeCategory.bind(this)}>{categories}</select>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
+          </form>
+        );
+        break;
+      case TAB.RECEIPT:
+        categories = this.props.receiptCategories.map(function (category) {
+          return <li key={category.id}>{category.name}</li>
+        });
+        form = (
+          <form>
+            <input type="text" name="amount" />
+            <select name="property">{properties}</select>
+            <input type="date" name="date"/>
+            <select name="category">{categories}</select>
+            <input type="text" name="memo" />
+            <button type="submit">ADD</button>
+          </form>
+        );
+        break;
+      case TAB.TRANSFER:
+        form = (
+          <form>
+            <input type="text" name="amount" />
+            <select name="property">{properties}</select>
+            <select name="property">{properties}</select>
+            <input type="date" name="date"/>
+            <input type="text" name="memo" />
+            <button type="submit">ADD</button>
+          </form>
+        );
+        break;
+      default:
+        break;
+    }
     return (
       <div>
-        <form>
-          <ul className="tabs-list"></ul>
-          <input type="text" name="amount" />
-          <select name="property">
-            <option value="1">資産1</option>
-            <option value="2">資産2</option>
-            <option value="3">資産3</option>
-            <option value="4">資産4</option>
-          </select>
-          <ul className="category-list">{categories}</ul>
-          <ul className="subcategory-list">{subcategories}</ul>
-          <input type="date" name="date"/>
-          <input type="text" name="memo" />
-          <button type="submit">ADD</button>
-        </form>
+        <ul className="tabs-list">
+          <li onClick={this._onClickTab.bind(this, TAB.PAYMENT)} className={cx({'active': (this.state.tab === TAB.PAYMENT)})}>支出</li>
+          <li onClick={this._onClickTab.bind(this, TAB.RECEIPT)} className={cx({'active': (this.state.tab === TAB.RECEIPT)})}>収入</li>
+          <li onClick={this._onClickTab.bind(this, TAB.TRANSFER)} className={cx({'active': (this.state.tab === TAB.TRANSFER)})}>振替</li>
+        </ul>
+        {form}
       </div>
     );
+  }
+  _onClickTab(TAB) {
+    this.setState({
+      tab: TAB
+    });
+    console.log(this, TAB);
+  }
+  _onChangeAmount(event) {
+    this.setState({amount: event.target.value});
+  }
+  _onChangeProperty(event) {
+    this.setState({property: event.target.value});
+  }
+  _onChangeDate(event) {
+    this.setState({date: event.target.value});
+  }
+  _onChangeCategory(event) {
+    this.setState({category: event.target.value});
+  }
+  _onChangeMemo(event) {
+    this.setState({memo: event.target.value});
+  }
+  _onClickAdd(event) {
+    event.preventDefault();
+    console.log(this.state);
   }
 }

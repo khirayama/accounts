@@ -10,10 +10,9 @@ export default class AccountApp extends React.Component {
     super();
     this.state = {
       properties: PropertyStore.getAll(),
-      ReceiptCategory: ReceiptCategoryStore.getAll(),
-      PaymentCategory: PaymentCategoryStore.getAll()
+      receiptCategories: ReceiptCategoryStore.getAll(),
+      paymentCategories: PaymentCategoryStore.getAll()
     };
-    console.log(this.state);
   }
   componentDidMount() {
     PropertyStore.addChangeListener(this._onChange.bind(this));
@@ -25,7 +24,10 @@ export default class AccountApp extends React.Component {
         <section>
           <section>
             <PropertySection properties={this.state.properties} />
-            <InputSection />
+            <InputSection
+              properties={this.state.properties}
+              receiptCategories={this.state.receiptCategories}
+              paymentCategories={this.state.paymentCategories} />
           </section>
         </section>
       </div>

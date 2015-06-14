@@ -25,7 +25,12 @@ class ReceiptCategoryStore extends Store {
     this._save();
   }
   getAll() {
-    return this._receiptCategories;
+    let receiptCategories = [];
+    for (let id in this._receiptCategories) {
+      if (!{}.hasOwnProperty.call(this._receiptCategories, id)) return false;
+      receiptCategories.push(this._receiptCategories[id]);
+    }
+    return receiptCategories;
   }
   _save() {
     localStorage.setItem('_receiptCategories', JSON.stringify(this._receiptCategories));

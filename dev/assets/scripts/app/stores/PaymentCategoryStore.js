@@ -34,7 +34,12 @@ class PaymentCategoryStore extends Store {
     this._save();
   }
   getAll() {
-    return this._paymentCategories;
+    let paymentCategories = [];
+    for (let id in this._paymentCategories) {
+      if (!{}.hasOwnProperty.call(this._paymentCategories, id)) return false;
+      paymentCategories.push(this._paymentCategories[id]);
+    }
+    return paymentCategories;
   }
   getBudgetType() {
     return BUDGET_TYPE;
