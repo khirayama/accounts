@@ -1,6 +1,6 @@
 import React from 'react';
 
-let TAB = {
+let MODE = {
   PAYMENT: 'PAYMENT',
   RECEIPT: 'RECEIPT',
   TRANSFER: 'TRANSFER'
@@ -9,11 +9,19 @@ let TAB = {
 export default class InputSection extends React.Component {
   constructor() {
     super();
+    let diff = 4; // 4hours
+    let now = new Date();
+    let date = new Date(1900 + now.getYear(), now.getMonth(), now.getDate(), now.getHours() - diff);
+    let _year = 1900 + now.getYear();
+    let __month = now.getMonth() + 1;
+    let _month = (__month < 10) ? ('0' + __month) : __month;
+    let _date = now.getDate();
+
     this.state = {
-      tab: TAB.PAYMENT,
+      mode: MODE.PAYMENT,
       amount: '',
       property: '',
-      data: '',
+      date: `${_year}-${_month}-${_date}`,
       category: '',
       memo: ''
     };
@@ -31,8 +39,9 @@ export default class InputSection extends React.Component {
     });
     let categories = [];
     let form;
-    switch (this.state.tab) {
-      case TAB.PAYMENT:
+
+    switch (this.state.mode) {
+      case MODE.PAYMENT:
         categories = this.props.paymentCategories.map(function (category) {
           return <option key={category.id} value={category.id}>{category.name}</option>
         });
@@ -47,30 +56,30 @@ export default class InputSection extends React.Component {
           </form>
         );
         break;
-      case TAB.RECEIPT:
+      case MODE.RECEIPT:
         categories = this.props.receiptCategories.map(function (category) {
-          return <li key={category.id}>{category.name}</li>
+          return <option key={category.id} value={category.id}>{category.name}</option>
         });
         form = (
           <form>
-            <input type="text" name="amount" />
-            <select name="property">{properties}</select>
-            <input type="date" name="date"/>
-            <select name="category">{categories}</select>
-            <input type="text" name="memo" />
-            <button type="submit">ADD</button>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
+            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
+            <select name="category" value={this.state.category} onChange={this._onChangeCategory.bind(this)}>{categories}</select>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
           </form>
         );
         break;
-      case TAB.TRANSFER:
+      case MODE.TRANSFER:
         form = (
           <form>
-            <input type="text" name="amount" />
-            <select name="property">{properties}</select>
-            <select name="property">{properties}</select>
-            <input type="date" name="date"/>
-            <input type="text" name="memo" />
-            <button type="submit">ADD</button>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
+            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
+            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
           </form>
         );
         break;
@@ -80,19 +89,16 @@ export default class InputSection extends React.Component {
     return (
       <div>
         <ul className="tabs-list">
-          <li onClick={this._onClickTab.bind(this, TAB.PAYMENT)} className={cx({'active': (this.state.tab === TAB.PAYMENT)})}>支出</li>
-          <li onClick={this._onClickTab.bind(this, TAB.RECEIPT)} className={cx({'active': (this.state.tab === TAB.RECEIPT)})}>収入</li>
-          <li onClick={this._onClickTab.bind(this, TAB.TRANSFER)} className={cx({'active': (this.state.tab === TAB.TRANSFER)})}>振替</li>
+          <li onClick={this._onClickTab.bind(this, MODE.PAYMENT)} className={cx({'active': (this.state.mode === MODE.PAYMENT)})}>支出</li>
+          <li onClick={this._onClickTab.bind(this, MODE.RECEIPT)} className={cx({'active': (this.state.mode === MODE.RECEIPT)})}>収入</li>
+          <li onClick={this._onClickTab.bind(this, MODE.TRANSFER)} className={cx({'active': (this.state.mode === MODE.TRANSFER)})}>振替</li>
         </ul>
         {form}
       </div>
     );
   }
-  _onClickTab(TAB) {
-    this.setState({
-      tab: TAB
-    });
-    console.log(this, TAB);
+  _onClickTab(MODE) {
+    this.setState({mode: MODE});
   }
   _onChangeAmount(event) {
     this.setState({amount: event.target.value});
