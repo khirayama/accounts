@@ -21,6 +21,8 @@ export default class InputSection extends React.Component {
       mode: MODE.PAYMENT,
       amount: '',
       property: '',
+      from: '',
+      to: '',
       date: `${_year}-${_month}-${_date}`,
       category: '',
       memo: ''
@@ -47,11 +49,11 @@ export default class InputSection extends React.Component {
         });
         form = (
           <form>
-            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
-            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
-            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
-            <select name="category" value={this.state.category} onChange={this._onChangeCategory.bind(this)}>{categories}</select>
-            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChange.bind(this)}/>
+            <select name="property" value={this.state.property} onChange={this._onChange.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChange.bind(this)}/>
+            <select name="category" value={this.state.category} onChange={this._onChange.bind(this)}>{categories}</select>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChange.bind(this)}/>
             <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
           </form>
         );
@@ -62,11 +64,11 @@ export default class InputSection extends React.Component {
         });
         form = (
           <form>
-            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
-            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
-            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
-            <select name="category" value={this.state.category} onChange={this._onChangeCategory.bind(this)}>{categories}</select>
-            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChange.bind(this)}/>
+            <select name="property" value={this.state.property} onChange={this._onChange.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChange.bind(this)}/>
+            <select name="category" value={this.state.category} onChange={this._onChange.bind(this)}>{categories}</select>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChange.bind(this)}/>
             <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
           </form>
         );
@@ -74,11 +76,11 @@ export default class InputSection extends React.Component {
       case MODE.TRANSFER:
         form = (
           <form>
-            <input type="text" name="amount" value={this.state.amount} onChange={this._onChangeAmount.bind(this)}/>
-            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
-            <select name="property" value={this.state.property} onChange={this._onChangeProperty.bind(this)}>{properties}</select>
-            <input type="date" name="date" value={this.state.date} onChange={this._onChangeDate.bind(this)}/>
-            <input type="text" name="memo" value={this.state.memo} onChange={this._onChangeMemo.bind(this)}/>
+            <input type="text" name="amount" value={this.state.amount} onChange={this._onChange.bind(this)}/>
+            <select name="from" value={this.state.from} onChange={this._onChange.bind(this)}>{properties}</select>
+            <select name="to" value={this.state.to} onChange={this._onChange.bind(this)}>{properties}</select>
+            <input type="date" name="date" value={this.state.date} onChange={this._onChange.bind(this)}/>
+            <input type="text" name="memo" value={this.state.memo} onChange={this._onChange.bind(this)}/>
             <button type="submit" onClick={this._onClickAdd.bind(this)}>ADD</button>
           </form>
         );
@@ -100,20 +102,10 @@ export default class InputSection extends React.Component {
   _onClickTab(MODE) {
     this.setState({mode: MODE});
   }
-  _onChangeAmount(event) {
-    this.setState({amount: event.target.value});
-  }
-  _onChangeProperty(event) {
-    this.setState({property: event.target.value});
-  }
-  _onChangeDate(event) {
-    this.setState({date: event.target.value});
-  }
-  _onChangeCategory(event) {
-    this.setState({category: event.target.value});
-  }
-  _onChangeMemo(event) {
-    this.setState({memo: event.target.value});
+  _onChange(event) {
+    let state = {};
+    state[event.target.name] = event.target.value;
+    this.setState(state);
   }
   _onClickAdd(event) {
     event.preventDefault();

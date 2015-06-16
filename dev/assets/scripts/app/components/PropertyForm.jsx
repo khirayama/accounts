@@ -16,13 +16,13 @@ export default class PropertyForm extends React.Component {
           <input type="text"
                  name="name"
                  value={this.state.name}
-                 onChange={this._onChangeName.bind(this)} />
+                 onChange={this._onChange.bind(this)} />
         </div>
         <div id="property-amount">
           <input type="number"
                  name="amount"
                  value={this.state.amount}
-                 onChange={this._onChangeAmount.bind(this)} />
+                 onChange={this._onChange.bind(this)} />
         </div>
         <div id="property-submit-btn"><button type="button" onClick={this._onSubmitNewProperty.bind(this)}>SUBMIT</button></div>
       </form>
@@ -35,10 +35,9 @@ export default class PropertyForm extends React.Component {
       amount: ''
     });
   }
-  _onChangeName(event) {
-    this.setState({name: event.target.value});
-  }
-  _onChangeAmount(event) {
-    this.setState({amount: event.target.value});
+  _onChange(event) {
+    let state = {};
+    state[event.target.name] = event.target.value;
+    this.setState(state);
   }
 }
