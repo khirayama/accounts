@@ -17,6 +17,8 @@ export default class InputSection extends React.Component {
     let _month = (__month < 10) ? ('0' + __month) : __month;
     let _date = now.getDate();
 
+    // TODO: propertyなどselectの初期値設定
+    // どうするのがよい？
     this.state = {
       mode: MODE.PAYMENT,
       amount: '',
