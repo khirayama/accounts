@@ -25,10 +25,28 @@ export default class InputSection extends React.Component {
       property: '',
       from: '',
       to: '',
-      date: `${_year}-${_month}-${_date}`,
+      date: '',
       category: '',
       memo: ''
     };
+  }
+  componentDidMount() {
+    // FIXME: 初期値設定にpropsが使えず苦肉の策。getInitialStateならいける？
+    let diff = 4; // 4hours
+    let now = new Date();
+    let date = new Date(1900 + now.getYear(), now.getMonth(), now.getDate(), now.getHours() - diff);
+    let _year = 1900 + now.getYear();
+    let __month = now.getMonth() + 1;
+    let _month = (__month < 10) ? ('0' + __month) : __month;
+    let _date = now.getDate();
+
+    this.setState({
+      property: this.props.properties[0].id,
+      from: this.props.properties[0].id,
+      to: this.props.properties[0].id,
+      date: `${_year}-${_month}-${_date}`,
+      category: this.props.receiptCategories[0].id,
+    });
   }
   render() {
     let cx = function (obj) {
@@ -112,5 +130,6 @@ export default class InputSection extends React.Component {
   _onClickAdd(event) {
     event.preventDefault();
     console.log(this.state);
+    // TODO: action叩く
   }
 }
