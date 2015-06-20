@@ -1,6 +1,6 @@
 import AppDispatcher from '../../framework/AppDispatcher';
 
-let PropertyActions = {
+let InputActionCreators = {
   create: (name, amount) => {
     AppDispatcher.dispatch('PROPERTY_CREATE', {
       name: name,
@@ -20,4 +20,6 @@ let PropertyActions = {
     });
   }
 };
-export default PropertyActions;
+export default InputActionCreators;
+
+
