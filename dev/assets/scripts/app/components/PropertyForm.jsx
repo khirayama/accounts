@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyActions from '../actions/PropertyActions';
+import PropertyActionCreaters from '../actions/PropertyActionCreaters';
 
 export default class PropertyForm extends React.Component {
   constructor() {
@@ -29,7 +29,7 @@ export default class PropertyForm extends React.Component {
     );
   }
   _onSubmitNewProperty() {
-    PropertyActions.create(this.state.name, this.state.amount);
+    PropertyActionCreaters.create(this.state.name, this.state.amount);
     this.setState({
       name: '',
       amount: ''

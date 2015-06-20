@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyActions from '../actions/PropertyActions';
+import PropertyActionCreaters from '../actions/PropertyActionCreaters';
 
 export default class PropertyItem extends React.Component {
   constructor() {
@@ -33,7 +33,7 @@ export default class PropertyItem extends React.Component {
     return li;
   }
   _onClickDeleteBtn() {
-    PropertyActions.destroy(this.props.property.id);
+    PropertyActionCreaters.destroy(this.props.property.id);
   }
   _onClickEditBtn() {
     this.setState({
@@ -49,7 +49,7 @@ export default class PropertyItem extends React.Component {
     this.setState({amount: event.target.value});
   }
   _onClickDoneBtn() {
-    PropertyActions.update(this.props.property.id, this.state.name, this.state.amount);
+    PropertyActionCreaters.update(this.props.property.id, this.state.name, this.state.amount);
     this.setState({isEditing: false});
   }
 }
