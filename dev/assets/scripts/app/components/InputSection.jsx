@@ -1,4 +1,5 @@
 import React from 'react';
+import PaymentActionCreators from '../actions/PaymentActionCreators';
 
 let MODE = {
   PAYMENT: 'PAYMENT',
@@ -129,7 +130,37 @@ export default class InputSection extends React.Component {
   }
   _onClickAdd(event) {
     event.preventDefault();
-    console.log(this.state);
-    // TODO: action叩く
+    switch (this.state.mode) {
+      case MODE.PAYMENT:
+        let payment = {
+          amount: this.state.amount,
+          property: this.state.property,
+          date: this.state.date,
+          category: this.state.category,
+          memo: this.state.memo
+        };
+        PaymentActionCreators.create(payment);
+        break;
+      case MODE.RECEIPT:
+        let receipt = {
+          amount: this.state.amount,
+          property: this.state.property,
+          date: this.state.date,
+          category: this.state.category,
+          memo: this.state.memo
+        };
+        // ReceiptActionCreators.create(receipt);
+        break;
+      case MODE.TRANSFER:
+        let transfer = {
+          amount: this.state.amount,
+          from: this.state.from,
+          to: this.state.to,
+          date: this.state.date,
+          memo: this.state.memo
+        };
+        // TransferActionCreators.create(transfer);
+        break;
+    }
   }
 }

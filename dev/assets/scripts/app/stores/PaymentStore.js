@@ -4,9 +4,15 @@ import Store from '../../framework/Store';
 class PaymentStore extends Store {
   constructor() {
     super();
+    this.register({
+      'PAYMENT_CREATE': (action) => {
+        console.log('???');
+        this._create(action.amount, action.date, action.category, action.memo);
+      }
+    });
     this._payments = this._load() || {};
   }
-  _create(amount, date, category, subcategory, memo) {
+  _create(amount, date, category, memo) {
     // date -> '2015/05/30'
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._payments[id] = {
@@ -14,7 +20,6 @@ class PaymentStore extends Store {
       amount: amount,
       date: date,
       category: category,
-      subcategory: subcategory,
       memo: memo
     };
     this._save();
@@ -26,6 +31,9 @@ class PaymentStore extends Store {
   _destroy(id) {
     delete this._payments[id];
     this._save();
+  }
+  getById(id) {
+    return this._payments[id];
   }
   getAll() {
     return this._payments;
@@ -45,7 +53,9 @@ class PaymentStore extends Store {
     return searchedPayments;
   }
   _save() {
+    localStorage.setItem('_payments', 'aaaa');
     localStorage.setItem('_payments', JSON.stringify(this._payments));
+    console.log(this._payments);
   }
   _load() {
     return JSON.parse(localStorage.getItem('_payments'));

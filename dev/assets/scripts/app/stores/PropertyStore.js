@@ -34,6 +34,9 @@ class PropertyStore extends Store {
     delete this._properties[id];
     this._save();
   }
+  getById(id) {
+    return this._properties[id];
+  }
   getAll() {
     let properties = [];
     for (let id in this._properties) {
