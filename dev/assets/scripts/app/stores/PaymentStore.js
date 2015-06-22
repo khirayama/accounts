@@ -6,8 +6,7 @@ class PaymentStore extends Store {
     super();
     this.register({
       'PAYMENT_CREATE': (action) => {
-        console.log('???');
-        this._create(action.amount, action.date, action.category, action.memo);
+        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.memo);
       }
     });
     this._payments = this._load() || {};
@@ -53,9 +52,7 @@ class PaymentStore extends Store {
     return searchedPayments;
   }
   _save() {
-    localStorage.setItem('_payments', 'aaaa');
     localStorage.setItem('_payments', JSON.stringify(this._payments));
-    console.log(this._payments);
   }
   _load() {
     return JSON.parse(localStorage.getItem('_payments'));
