@@ -4,6 +4,11 @@ import Store from '../../framework/Store';
 class ReceiptStore extends Store {
   constructor() {
     super();
+    this.register({
+      'RECEIPT_CREATE': (action) => {
+        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.memo);
+      }
+    });
     this._receipts = this._load() || {};
   }
   _create(amount, date, category, subcategory, memo) {

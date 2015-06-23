@@ -1,5 +1,6 @@
 import React from 'react';
 import PaymentActionCreators from '../actions/PaymentActionCreators';
+import ReceiptActionCreators from '../actions/ReceiptActionCreators';
 
 let MODE = {
   PAYMENT: 'PAYMENT',
@@ -149,7 +150,7 @@ export default class InputSection extends React.Component {
           category: this.state.category,
           memo: this.state.memo
         };
-        // ReceiptActionCreators.create(receipt);
+        ReceiptActionCreators.create(receipt);
         break;
       case MODE.TRANSFER:
         let transfer = {
