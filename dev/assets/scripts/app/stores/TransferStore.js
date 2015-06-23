@@ -4,6 +4,11 @@ import Store from '../../framework/Store';
 class TransferStore extends Store {
   constructor() {
     super();
+    this.register({
+      'TRANSFER_CREATE': (action) => {
+        this._create(action.amount, action.date, action.from, action.to, action.memo);
+      }
+    });
     this._transfers = this._load() || {};
   }
   _create(amount, date, from, to, memo) {
