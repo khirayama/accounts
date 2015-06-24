@@ -1,12 +1,10 @@
 # Store
 - [x] Property(id, name, amount)
-- [x] Receipt(id, amount, date, subcategory, memo)
-- [x] Payment(id, amount, date, subcategory, memo)
+- [x] Receipt(id, amount, date, category, memo)
+- [x] Payment(id, amount, date, category, memo)
 - [x] Transfer(id, amount, date, from, to, memo)
 - [x] ReceiptCategory(id, name)
-- [x] ReceiptSubcategory(id, name, category)
 - [x] PaymentCategory(id, name, budget, budgetType)
-- [x] PaymentSubcategory(id, name, category)
 - [x] SettingDate(id, date, holiday)
 
 # AppDispatcher
