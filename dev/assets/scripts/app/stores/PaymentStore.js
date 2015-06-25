@@ -35,7 +35,12 @@ class PaymentStore extends Store {
     return this._payments[id];
   }
   getAll() {
-    return this._payments;
+    let payments = [];
+    for (let id in this._payments) {
+      if (!{}.hasOwnProperty.call(this._payments, id)) return false;
+      payments.push(this._payments[id]);
+    }
+    return payments;
   }
   getByMonth(year, month) {
     // ReceiptStore.getByMonth(2015, 5); -> 2015年の五月分

@@ -33,7 +33,12 @@ class ReceiptStore extends Store {
     this._save();
   }
   getAll() {
-    return this._receipts;
+    let receipts = [];
+    for (let id in this._receipts) {
+      if (!{}.hasOwnProperty.call(this._receipts, id)) return false;
+      receipts.push(this._receipts[id]);
+    }
+    return receipts;
   }
   getByMonth(year, month) {
     // ReceiptStore.getByMonth(2015, 5); -> 2015年の五月分
