@@ -11,7 +11,7 @@ class ReceiptStore extends Store {
     });
     this._receipts = this._load() || {};
   }
-  _create(amount, date, category, subcategory, memo) {
+  _create(amount, date, category, memo) {
     // date -> '2015/05/30'
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._receipts[id] = {
@@ -19,7 +19,6 @@ class ReceiptStore extends Store {
       amount: amount,
       date: date,
       category: category,
-      subcategory: subcategory,
       memo: memo
     };
     this._save();
