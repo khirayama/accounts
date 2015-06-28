@@ -3,6 +3,9 @@ import React from 'react';
 export default class HistorySection extends React.Component {
   constructor() {
     super();
+    this.state = {
+      histories: []
+    };
   }
   componentDidMount() {
     this.setState({
@@ -14,8 +17,7 @@ export default class HistorySection extends React.Component {
     });
   }
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    console.log(this.state.histories);
     return (
       <h2>History</h2>
     );
