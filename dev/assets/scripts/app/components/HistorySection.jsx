@@ -1,4 +1,5 @@
 import React from 'react';
+import PaymentCategoryStore from '../stores/PaymentCategoryStore';
 
 export default class HistorySection extends React.Component {
   constructor() {
@@ -17,9 +18,14 @@ export default class HistorySection extends React.Component {
     });
   }
   render() {
-    console.log(this.state.histories);
+    let histories = this.state.histories.map((history) => {
+      return <li>{history.date} {history.category} {history.amount} {history.memo}</li>
+    });
     return (
-      <h2>History</h2>
+      <section>
+        <h2>History</h2>
+        <ul>{histories}</ul>
+      </section>
     );
   }
 }
