@@ -10,7 +10,7 @@ export default class HistorySection extends React.Component {
   }
   componentDidMount() {
     this.setState({
-      histories: (this.props.payments.concat(this.props.receipts, this.props.transfers)).sort(function (a, b) {
+      histories: (this.props.payments.concat(this.props.receipts, this.props.transfers)).sort((a, b) => {
         if (a.date > b.date) return 1;
         if (b.date > a.date) return -1;
         return 0;
@@ -19,7 +19,7 @@ export default class HistorySection extends React.Component {
   }
   render() {
     let histories = this.state.histories.map((history) => {
-      return <li>{history.date} {history.category} {history.amount} {history.memo}</li>
+      return (<li>{history.date} {history.category} {history.amount} {history.memo}</li>);
     });
     return (
       <section>
