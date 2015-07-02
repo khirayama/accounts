@@ -24,7 +24,9 @@ export default class HistorySection extends React.Component {
     return (
       <section>
         <h2>History</h2>
-        <ul>{histories}</ul>
+          {histories}
+        <ul>
+        </ul>
       </section>
     );
   }
