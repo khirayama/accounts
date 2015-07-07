@@ -19,7 +19,7 @@ export default class HistorySection extends React.Component {
   }
   render() {
     // TODO: property_nameの追加、category_nameの追加、typeの追加
-    // TODO: どこで付与すれば良い？
+    // TODO: どこでtypeは付与すれば良い？ -> API的にStoreを扱う層が必要？
     let histories = this.state.histories.map((history) => {
       return (<li>{history.date} {history.category} {history.amount} {history.memo}</li>);
     });
