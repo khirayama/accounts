@@ -25,6 +25,22 @@ let TransferActionCreators = {
       name: toProperty.name,
       amount: +toProperty.amount + +transfer.amount
     });
+  },
+  destroy: (transfer) => {
+    let fromProperty = PropertyStore.getById(transfer.from);
+    let toProperty = PropertyStore.getById(transfer.to);
+
+    AppDispatcher.dispatch('TRANSFER_DESTROY', {id: transfer.id});
+    AppDispatcher.dispatch('PROPERTY_UPDATE', {
+      id: transfer.from,
+      name: fromProperty.name,
+      amount: +fromProperty.amount + +transfer.amount
+    });
+    AppDispatcher.dispatch('PROPERTY_UPDATE', {
+      id: transfer.to,
+      name: toProperty.name,
+      amount: +toProperty.amount - +transfer.amount
+    });
   }
 };
 export default TransferActionCreators;

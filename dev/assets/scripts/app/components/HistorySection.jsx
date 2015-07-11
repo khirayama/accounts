@@ -2,6 +2,7 @@ import React from 'react';
 import PaymentCategoryStore from '../stores/PaymentCategoryStore';
 import PaymentActionCreators from '../actions/PaymentActionCreators';
 import ReceiptActionCreators from '../actions/ReceiptActionCreators';
+import TransferActionCreators from '../actions/TransferActionCreators';
 
 export default class HistorySection extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ export default class HistorySection extends React.Component {
           return (
             <li key={history.id} className={"history-type-" + history.type}>
               {history.date} {history.amount} {history.memo} {history.from_name} -> {history.to_name}
-              <button>DELETE</button>
+              <button onClick={this._onClickDelete.bind(this, history)}>DELETE</button>
             </li>
           );
           break;
@@ -51,6 +52,9 @@ export default class HistorySection extends React.Component {
         break;
       case 'receipt':
         ReceiptActionCreators.destroy(history);
+        break;
+      case 'transfer':
+        TransferActionCreators.destroy(history);
         break;
       default:
         break;

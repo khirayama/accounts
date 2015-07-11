@@ -8,6 +8,9 @@ class TransferStore extends Store {
     this.register({
       'TRANSFER_CREATE': (action) => {
         this._create(action.amount, action.date, action.from, action.to, action.memo);
+      },
+      'TRANSFER_DESTROY': (action) => {
+        this._destroy(action.id);
       }
     });
     this._transfers = this._load() || {};
