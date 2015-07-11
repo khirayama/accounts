@@ -7,8 +7,8 @@ export default class HistorySection extends React.Component {
   }
   render() {
     let _histories = (this.props.payments.concat(this.props.receipts, this.props.transfers)).sort((a, b) => {
-      if (a.date > b.date) return 1;
-      if (b.date > a.date) return -1;
+      if (a.date > b.date) return -1;
+      if (b.date > a.date) return 1;
       return 0;
     });
 
