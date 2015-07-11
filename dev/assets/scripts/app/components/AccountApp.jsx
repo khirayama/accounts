@@ -23,6 +23,9 @@ export default class AccountApp extends React.Component {
   }
   componentDidMount() {
     PropertyStore.addChangeListener(this._onChange.bind(this));
+    ReceiptStore.addChangeListener(this._onChange.bind(this));
+    PaymentStore.addChangeListener(this._onChange.bind(this));
+    TransferStore.addChangeListener(this._onChange.bind(this));
   }
   // TODO: componentWillUnmount書く
   render() {
@@ -66,8 +69,14 @@ export default class AccountApp extends React.Component {
     // );
   }
   _onChange() {
+    // TODO: これくらいの規模なら大雑把にいいよね
     this.setState({
-      properties: PropertyStore.getAll()
+      properties: PropertyStore.getAll(),
+      receipts: ReceiptStore.getAll(),
+      payments: PaymentStore.getAll(),
+      transfers: TransferStore.getAll(),
+      receiptCategories: ReceiptCategoryStore.getAll(),
+      paymentCategories: PaymentCategoryStore.getAll()
     });
   }
 }

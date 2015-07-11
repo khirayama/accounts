@@ -1,5 +1,6 @@
 import 'babel/polyfill';
 import Store from '../../framework/Store';
+import PropertyStore from './PropertyStore';
 
 class TransferStore extends Store {
   constructor() {
@@ -34,9 +35,15 @@ class TransferStore extends Store {
   }
   getAll() {
     let transfers = [];
+    let transfer = {};
     for (let id in this._transfers) {
       if (!{}.hasOwnProperty.call(this._transfers, id)) return false;
-      transfers.push(this._transfers[id]);
+      transfer = this._transfers[id];
+      transfers.push(Object.assign({}, transfer, {
+        type: 'transfer',
+        from_name: PropertyStore.getById(transfer.from).name,
+        to_name: PropertyStore.getById(transfer.to).name
+      }));
     }
     return transfers;
   }
