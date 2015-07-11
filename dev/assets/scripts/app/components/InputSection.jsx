@@ -43,12 +43,13 @@ export default class InputSection extends React.Component {
     let _month = (__month < 10) ? ('0' + __month) : __month;
     let _date = now.getDate();
 
+    if (!this.props.properties.length) return;
     this.setState({
       property: this.props.properties[0].id,
       from: this.props.properties[0].id,
       to: this.props.properties[0].id,
       date: `${_year}-${_month}-${_date}`,
-      category: this.props.receiptCategories[0].id,
+      category: this.props.paymentCategories[0].id,
     });
   }
   render() {

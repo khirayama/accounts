@@ -26,6 +26,7 @@ export default class HistorySection extends React.Component {
     let histories = this.state.histories.map((history) => {
       return (<li>{history.date} {history.category} {history.amount} {history.memo}</li>);
     });
+    console.log(this.state.histories);
     return (
       <section>
         <h2>History</h2>

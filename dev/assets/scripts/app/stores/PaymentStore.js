@@ -1,17 +1,19 @@
 import 'babel/polyfill';
 import Store from '../../framework/Store';
+import PaymentCategoryStore from './PaymentCategoryStore';
+import PropertyStore from './PropertyStore';
 
 class PaymentStore extends Store {
   constructor() {
     super();
     this.register({
       'PAYMENT_CREATE': (action) => {
-        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.memo);
+        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.property, action.memo);
       }
     });
     this._payments = this._load() || {};
   }
-  _create(amount, date, category, memo) {
+  _create(amount, date, category, property, memo) {
     // date -> '2015/05/30'
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._payments[id] = {
@@ -19,6 +21,7 @@ class PaymentStore extends Store {
       amount: amount,
       date: date,
       category: category,
+      property: property,
       memo: memo
     };
     this._save();
@@ -36,10 +39,17 @@ class PaymentStore extends Store {
   }
   getAll() {
     let payments = [];
+    let payment = {};
     for (let id in this._payments) {
       if (!{}.hasOwnProperty.call(this._payments, id)) return false;
-      payments.push(this._payments[id]);
+      payment = this._payments[id];
+      payments.push(Object.assign({}, payment, {
+        type: 'payment',
+        category_name: PaymentCategoryStore.getById(payment.category).name,
+        property_name: PropertyStore.getById(payment.property).name,
+      }));
     }
+    console.log(payments);
     return payments;
   }
   getByMonth(year, month) {
