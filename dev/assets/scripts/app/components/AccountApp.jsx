@@ -42,7 +42,6 @@ export default class AccountApp extends React.Component {
             transfers={this.state.transfers}
             receiptCategories={this.state.receiptCategories}
             paymentCategories={this.state.paymentCategories} />
-          />
         </section>
       </div>
     );
