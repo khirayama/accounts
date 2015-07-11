@@ -14,3 +14,14 @@
 .active {
   color: red;
 }
+.history-type {
+  &-payment {
+    color: red;
+  }
+  &-receipt {
+    color: blue;
+  }
+  &-transfer {
+    color: green;
+  }
+}
