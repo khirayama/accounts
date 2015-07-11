@@ -1,7 +1,5 @@
 import AppDispatcher from '../../framework/AppDispatcher';
 import PropertyStore from '../stores/PropertyStore';
-// FIXME: ここでは使用していないが、他にまだ呼び出していないため記述
-import ReceiptStore from '../stores/ReceiptStore';
 
 // FIXME: 支出、収入、振替を総じたいいAction名。もっと分けるべきか
 let ReceiptActionCreators = {
@@ -19,6 +17,15 @@ let ReceiptActionCreators = {
       id: receipt.property,
       name: property.name,
       amount: +property.amount + +receipt.amount
+    });
+  },
+  destroy: (receipt) => {
+    let property = PropertyStore.getById(receipt.property);
+    AppDispatcher.dispatch('RECEIPT_DESTROY', {id: receipt.id});
+    AppDispatcher.dispatch('PROPERTY_UPDATE', {
+      id: receipt.property,
+      name: property.name,
+      amount: +property.amount - +receipt.amount
     });
   }
 };

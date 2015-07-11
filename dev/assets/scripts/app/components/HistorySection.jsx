@@ -1,6 +1,7 @@
 import React from 'react';
 import PaymentCategoryStore from '../stores/PaymentCategoryStore';
 import PaymentActionCreators from '../actions/PaymentActionCreators';
+import ReceiptActionCreators from '../actions/ReceiptActionCreators';
 
 export default class HistorySection extends React.Component {
   constructor() {
@@ -47,6 +48,9 @@ export default class HistorySection extends React.Component {
     switch (history.type) {
       case 'payment':
         PaymentActionCreators.destroy(history);
+        break;
+      case 'receipt':
+        ReceiptActionCreators.destroy(history);
         break;
       default:
         break;
