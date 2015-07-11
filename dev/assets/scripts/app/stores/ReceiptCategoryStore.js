@@ -24,6 +24,9 @@ class ReceiptCategoryStore extends Store {
     delete this._receiptCategories[id];
     this._save();
   }
+  getById(id) {
+    return this._receiptCategories[id];
+  }
   getAll() {
     let receiptCategories = [];
     for (let id in this._receiptCategories) {

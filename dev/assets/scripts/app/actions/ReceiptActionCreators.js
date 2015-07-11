@@ -12,6 +12,7 @@ let ReceiptActionCreators = {
       amount: receipt.amount,
       date: receipt.date,
       category: receipt.category,
+      property: receipt.property,
       memo: receipt.memo
     });
     AppDispatcher.dispatch('PROPERTY_UPDATE', {

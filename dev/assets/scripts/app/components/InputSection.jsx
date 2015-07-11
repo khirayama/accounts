@@ -3,7 +3,7 @@ import PaymentActionCreators from '../actions/PaymentActionCreators';
 import ReceiptActionCreators from '../actions/ReceiptActionCreators';
 import TransferActionCreators from '../actions/TransferActionCreators';
 
-let MODE = {
+let _MODE = {
   PAYMENT: 'PAYMENT',
   RECEIPT: 'RECEIPT',
   TRANSFER: 'TRANSFER'
@@ -23,7 +23,7 @@ export default class InputSection extends React.Component {
     // TODO: propertyなどselectの初期値設定
     // どうするのがよい？
     this.state = {
-      mode: MODE.PAYMENT,
+      mode: _MODE.PAYMENT,
       amount: '',
       property: '',
       from: '',
@@ -47,7 +47,7 @@ export default class InputSection extends React.Component {
     this.setState({
       property: this.props.properties[0].id,
       from: this.props.properties[0].id,
-      to: this.props.properties[0].id,
+      to: this.props.properties[1].id,
       date: `${_year}-${_month}-${_date}`,
       category: this.props.paymentCategories[0].id,
     });
@@ -67,7 +67,7 @@ export default class InputSection extends React.Component {
     let form;
 
     switch (this.state.mode) {
-      case MODE.PAYMENT:
+      case _MODE.PAYMENT:
         categories = this.props.paymentCategories.map(function (category) {
           return <option key={category.id} value={category.id}>{category.name}</option>
         });
@@ -82,7 +82,7 @@ export default class InputSection extends React.Component {
           </form>
         );
         break;
-      case MODE.RECEIPT:
+      case _MODE.RECEIPT:
         categories = this.props.receiptCategories.map(function (category) {
           return <option key={category.id} value={category.id}>{category.name}</option>
         });
@@ -97,7 +97,7 @@ export default class InputSection extends React.Component {
           </form>
         );
         break;
-      case MODE.TRANSFER:
+      case _MODE.TRANSFER:
         form = (
           <form>
             <input type="text" name="amount" value={this.state.amount} onChange={this._onChange.bind(this)}/>
@@ -115,26 +115,43 @@ export default class InputSection extends React.Component {
     return (
       <div>
         <ul className="tabs-list">
-          <li onClick={this._onClickTab.bind(this, MODE.PAYMENT)} className={cx({'active': (this.state.mode === MODE.PAYMENT)})}>支出</li>
-          <li onClick={this._onClickTab.bind(this, MODE.RECEIPT)} className={cx({'active': (this.state.mode === MODE.RECEIPT)})}>収入</li>
-          <li onClick={this._onClickTab.bind(this, MODE.TRANSFER)} className={cx({'active': (this.state.mode === MODE.TRANSFER)})}>振替</li>
+          <li onClick={this._onClickTab.bind(this, _MODE.PAYMENT)} className={cx({'active': (this.state.mode === _MODE.PAYMENT)})}>支出</li>
+          <li onClick={this._onClickTab.bind(this, _MODE.RECEIPT)} className={cx({'active': (this.state.mode === _MODE.RECEIPT)})}>収入</li>
+          <li onClick={this._onClickTab.bind(this, _MODE.TRANSFER)} className={cx({'active': (this.state.mode === _MODE.TRANSFER)})}>振替</li>
         </ul>
         {form}
       </div>
     );
   }
   _onClickTab(MODE) {
-    this.setState({mode: MODE});
+    let state = {mode: MODE};
+    switch (MODE) {
+      case _MODE.PAYMENT:
+        state.category = this.props.paymentCategories[0].id;
+        break;
+      case _MODE.RECEIPT:
+        state.category = this.props.receiptCategories[0].id;
+        break;
+      case _MODE.TRANSFER:
+        state.from = this.props.properties[0].id;
+        state.to = this.props.properties[1].id;
+        break;
+      default:
+        break;
+    }
+    this.setState(state);
   }
   _onChange(event) {
     let state = {};
-    state[event.target.name] = event.target.value;
+    let name = event.target.name;
+    let value = event.target.value;
+    state[name] = value;
     this.setState(state);
   }
   _onClickAdd(event) {
     event.preventDefault();
     switch (this.state.mode) {
-      case MODE.PAYMENT:
+      case _MODE.PAYMENT:
         let payment = {
           amount: this.state.amount,
           property: this.state.property,
@@ -144,7 +161,7 @@ export default class InputSection extends React.Component {
         };
         PaymentActionCreators.create(payment);
         break;
-      case MODE.RECEIPT:
+      case _MODE.RECEIPT:
         let receipt = {
           amount: this.state.amount,
           property: this.state.property,
@@ -154,7 +171,7 @@ export default class InputSection extends React.Component {
         };
         ReceiptActionCreators.create(receipt);
         break;
-      case MODE.TRANSFER:
+      case _MODE.TRANSFER:
         let transfer = {
           amount: this.state.amount,
           from: this.state.from,

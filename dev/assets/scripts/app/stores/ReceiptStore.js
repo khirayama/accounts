@@ -1,17 +1,19 @@
 import 'babel/polyfill';
 import Store from '../../framework/Store';
+import ReceiptCategoryStore from './ReceiptCategoryStore';
+import PropertyStore from './PropertyStore';
 
 class ReceiptStore extends Store {
   constructor() {
     super();
     this.register({
       'RECEIPT_CREATE': (action) => {
-        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.memo);
+        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.property, action.memo);
       }
     });
     this._receipts = this._load() || {};
   }
-  _create(amount, date, category, memo) {
+  _create(amount, date, category, property, memo) {
     // date -> '2015/05/30'
     let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
     this._receipts[id] = {
@@ -19,6 +21,7 @@ class ReceiptStore extends Store {
       amount: amount,
       date: date,
       category: category,
+      property: property,
       memo: memo
     };
     this._save();
@@ -31,11 +34,20 @@ class ReceiptStore extends Store {
     delete this._receipts[id];
     this._save();
   }
+  getById(id) {
+    return this._receipts[id];
+  }
   getAll() {
     let receipts = [];
+    let receipt = {};
     for (let id in this._receipts) {
       if (!{}.hasOwnProperty.call(this._receipts, id)) return false;
-      receipts.push(this._receipts[id]);
+      receipt = this._receipts[id];
+      receipts.push(Object.assign({}, this._receipts[id], {
+        type: 'receipt',
+        category_name: ReceiptCategoryStore.getById(receipt.category).name,
+        property_name: PropertyStore.getById(receipt.property).name
+      }));
     }
     return receipts;
   }

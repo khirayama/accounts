@@ -42,7 +42,6 @@ class PaymentCategoryStore extends Store {
     return paymentCategories;
   }
   getById(id) {
-    console.log(id, this._paymentCategories);
     return this._paymentCategories[id];
   }
   getBudgetType() {

@@ -49,7 +49,6 @@ class PaymentStore extends Store {
         property_name: PropertyStore.getById(payment.property).name,
       }));
     }
-    console.log(payments);
     return payments;
   }
   getByMonth(year, month) {

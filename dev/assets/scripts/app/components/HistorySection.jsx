@@ -24,9 +24,8 @@ export default class HistorySection extends React.Component {
     // TODO: Universalしたい
     // TODO: StoreとStorageは分けて、StoreがAPI的なメソッドを持った方がよさそうだな
     let histories = this.state.histories.map((history) => {
-      return (<li>{history.date} {history.category} {history.amount} {history.memo}</li>);
+      return (<li>{history.date} {history.category_name} {history.amount} {history.memo} {history.property_name}</li>);
     });
-    console.log(this.state.histories);
     return (
       <section>
         <h2>History</h2>
