@@ -7,7 +7,6 @@ import PaymentStore from '../stores/PaymentStore';
 let PaymentActionCreators = {
   create: (payment) => {
     let property = PropertyStore.getById(payment.property);
-    // paymentなので、資産を減らしてcreate
     AppDispatcher.dispatch('PAYMENT_CREATE', {
       amount: payment.amount,
       date: payment.date,
@@ -19,6 +18,15 @@ let PaymentActionCreators = {
       id: payment.property,
       name: property.name,
       amount: +property.amount - +payment.amount
+    });
+  },
+  destroy: (payment) => {
+    let property = PropertyStore.getById(payment.property);
+    AppDispatcher.dispatch('PAYMENT_DESTROY', {id: payment.id});
+    AppDispatcher.dispatch('PROPERTY_UPDATE', {
+      id: payment.property,
+      name: property.name,
+      amount: +property.amount + +payment.amount
     });
   }
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PaymentCategoryStore from '../stores/PaymentCategoryStore';
+import PaymentActionCreators from '../actions/PaymentActionCreators';
 
 export default class HistorySection extends React.Component {
   constructor() {
@@ -19,7 +20,8 @@ export default class HistorySection extends React.Component {
         case 'receipt':
           return (
             <li key={history.id} className={"history-type-" + history.type}>
-              {history.date} {history.category_name} {history.amount} {history.memo} {history.property_name}
+              {history.date} {history.amount} {history.category_name} {history.memo} {history.property_name}
+              <button onClick={this._onClickDelete.bind(this, history)}>DELETE</button>
             </li>
           );
           break;
@@ -27,6 +29,7 @@ export default class HistorySection extends React.Component {
           return (
             <li key={history.id} className={"history-type-" + history.type}>
               {history.date} {history.amount} {history.memo} {history.from_name} -> {history.to_name}
+              <button>DELETE</button>
             </li>
           );
           break;
@@ -39,5 +42,14 @@ export default class HistorySection extends React.Component {
         <ul>{histories}</ul>
       </section>
     );
+  }
+  _onClickDelete(history) {
+    switch (history.type) {
+      case 'payment':
+        PaymentActionCreators.destroy(history);
+        break;
+      default:
+        break;
+    }
   }
 }
