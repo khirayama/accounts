@@ -8,7 +8,7 @@ class PaymentStore extends Store {
     super();
     this.register({
       'PAYMENT_CREATE': (action) => {
-        if (action.amount && action.date && action.category) this._create(action.amount, action.date, action.category, action.property, action.memo);
+        this._create(action.amount, action.date, action.category, action.property, action.memo);
       },
       'PAYMENT_DESTROY': (action) => {
         this._destroy(action.id);
