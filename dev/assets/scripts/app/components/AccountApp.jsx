@@ -8,6 +8,7 @@ import PaymentCategoryStore from '../stores/PaymentCategoryStore';
 import PropertySection from './PropertySection';
 import InputSection from './InputSection';
 import HistorySection from './HistorySection';
+import BudgetSection from './BudgetSection';
 
 export default class AccountApp extends React.Component {
   constructor() {
