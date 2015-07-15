@@ -39,13 +39,16 @@ export default class AccountApp extends React.Component {
               properties={this.state.properties}
               receiptCategories={this.state.receiptCategories}
               paymentCategories={this.state.paymentCategories} />
+            <HistorySection
+              payments={this.state.payments}
+              receipts={this.state.receipts}
+              transfers={this.state.transfers}
+              receiptCategories={this.state.receiptCategories}
+              paymentCategories={this.state.paymentCategories} />
+            <BudgetSection
+              payments={this.state.payments}
+              paymentCategories={this.state.paymentCategories} />
           </section>
-          <HistorySection
-            payments={this.state.payments}
-            receipts={this.state.receipts}
-            transfers={this.state.transfers}
-            receiptCategories={this.state.receiptCategories}
-            paymentCategories={this.state.paymentCategories} />
         </section>
       </div>
     );
@@ -54,13 +57,9 @@ export default class AccountApp extends React.Component {
     //     <section>
     //       <Header />
     //       <section>
-    //         <PropertySection properties={this.state.properties} />
     //         <BudgetSection />
-    //         <InputSection />
-    //         <HistorySection />
     //       </section>
     //     </section>
-
     //     <section>
     //       <GeneralSettingSection />
     //       <CategorySettingSection />
