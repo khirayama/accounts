@@ -41,6 +41,7 @@ class ReceiptStore extends Store {
     return this._receipts[id];
   }
   getAll() {
+    // TODO: 動かんくなっとるやん...
     let receipts = [];
     let receipt = {};
     for (let id in this._receipts) {
