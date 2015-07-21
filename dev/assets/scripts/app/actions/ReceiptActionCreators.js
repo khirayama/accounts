@@ -5,7 +5,7 @@ import PropertyStore from '../stores/PropertyStore';
 let ReceiptActionCreators = {
   create: (receipt) => {
     let property = PropertyStore.getById(receipt.property);
-    // TODO: receiptなので、資産を増やしてcreate
+    // receiptなので、資産を増やしてcreate
     AppDispatcher.dispatch('RECEIPT_CREATE', {
       amount: receipt.amount,
       date: receipt.date,
