@@ -10,58 +10,53 @@ let _MODE = {
 };
 
 export default class InputSection extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     let diff = 4; // 4hours
     let now = new Date();
     let date = new Date(1900 + now.getYear(), now.getMonth(), now.getDate(), now.getHours() - diff);
     let _year = 1900 + now.getYear();
     let __month = now.getMonth() + 1;
     let _month = (__month < 10) ? ('0' + __month) : __month;
-    let _date = now.getDate();
+    let __date = now.getDate();
+    let _date = (__date < 10) ? ('0' + __date) : __date;
 
     // TODO: propertyなどselectの初期値設定
-    // どうするのがよい？
-    this.state = {
-      mode: _MODE.PAYMENT,
-      amount: '',
-      property: '',
-      from: '',
-      to: '',
-      date: '',
-      category: '',
-      memo: ''
-    };
-  }
-  componentDidMount() {
-    // FIXME: 初期値設定にpropsが使えず苦肉の策。getInitialStateならいける？
-    let diff = 4; // 4hours
-    let now = new Date();
-    let date = new Date(1900 + now.getYear(), now.getMonth(), now.getDate(), now.getHours() - diff);
-    let _year = 1900 + now.getYear();
-    let __month = now.getMonth() + 1;
-    let _month = (__month < 10) ? ('0' + __month) : __month;
-    let _date = now.getDate();
-
-    if (!this.props.properties.length) return;
-    this.setState({
-      property: this.props.properties[0].id,
-      from: this.props.properties[0].id,
-      to: this.props.properties[1].id,
-      date: `${_year}-${_month}-${_date}`,
-      category: this.props.paymentCategories[0].id,
-    });
+    // FIXME: 整理する
+    if (this.props.properties.length >= 1) {
+      this.state = {
+        mode: _MODE.PAYMENT,
+        amount: '',
+        property: this.props.properties[0].id,
+        from: this.props.properties[0].id,
+        to: '',
+        date: `${_year}-${_month}-${_date}`,
+        category: this.props.paymentCategories[0].id,
+        memo: ''
+      };
+    } else {
+      this.state = {
+        mode: _MODE.PAYMENT,
+        amount: '',
+        property: '',
+        from: '',
+        to: '',
+        date: `${_year}-${_month}-${_date}`,
+        category: '',
+        memo: ''
+      };
+    }
   }
   render() {
-    let cx = function (obj) {
+    let cx = (obj) => {
       let classes = [];
       for (let className in obj) {
         if (obj[className]) classes.push(className);
         return classes.join(' ');
       }
     };
-    let properties = this.props.properties.map(function (property) {
-      return <option key={property.id} value={property.id}>{property.name}</option>
+    let properties = this.props.properties.map((property) => {
+      return <option key={property.id} value={property.id}>{property.name}</option>;
     });
     let categories = [];
     let form;
