@@ -131,8 +131,6 @@ export default class InputSection extends React.Component {
         state.from = this.props.properties[0].id;
         state.to = this.props.properties[1].id;
         break;
-      default:
-        break;
     }
     this.setState(state);
   }
